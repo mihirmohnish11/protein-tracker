@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<link rel="icon" type="image/png" href="data:image/png;base64,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"/>
+<link rel="apple-touch-icon" href="data:image/png;base64,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"/>
+<title>Protein Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0a0a;--surface:#141414;--surface2:#1e1e1e;--border:#2a2a2a;--green:#00e676;--green-dim:#00e67622;--amber:#ffab40;--red:#ff5252;--text:#f0f0f0;--text2:#888;--text3:#444;--radius:16px;--radius-sm:10px;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow:hidden;}
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:430px;margin:0 auto;}
+.header{padding:52px 20px 16px;background:var(--bg);}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.date-label{font-size:12px;color:var(--text2);letter-spacing:0.12em;text-transform:uppercase;font-family:'DM Mono',monospace;}
+.reset-btn{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;background:none;border:1px solid var(--border);border-radius:20px;padding:4px 12px;cursor:pointer;}
+.ring-row{display:flex;align-items:center;gap:16px;}
+.ring-wrap{position:relative;width:80px;height:80px;flex-shrink:0;}
+.ring-wrap svg{transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--surface2);stroke-width:6;}
+.ring-fill{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 0.5s ease,stroke 0.3s;}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ring-pct{font-size:16px;font-weight:800;color:var(--text);line-height:1;}
+.ring-pct-label{font-size:9px;color:var(--text2);font-family:'DM Mono',monospace;margin-top:2px;}
+.stats-col{flex:1;display:flex;flex-direction:column;gap:8px;}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;}
+.stat-label{font-size:11px;color:var(--text2);font-family:'DM Mono',monospace;}
+.stat-val{font-size:18px;font-weight:700;}
+.stat-val span{font-size:11px;font-weight:400;color:var(--text2);}
+.stat-val.green{color:var(--green);}
+.stat-val.amber{color:var(--amber);}
+.target-input{background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:3px 8px;width:60px;text-align:center;}
+.target-input:focus{outline:none;border-color:var(--green);}
+.cal-row{display:flex;gap:12px;margin-top:10px;}
+.cal-stat{flex:1;background:var(--surface);border-radius:var(--radius-sm);padding:8px 10px;}
+.cal-label{font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:2px;}
+.cal-val{font-size:15px;font-weight:700;color:var(--amber);}
+.cal-val span{font-size:10px;font-weight:400;color:var(--text2);}
+.tabs{display:flex;padding:0 20px;gap:4px;margin-bottom:4px;}
+.tab{flex:1;padding:8px 2px;text-align:center;font-size:10px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;border-radius:8px;cursor:pointer;color:var(--text2);border:none;background:none;font-family:'Syne',sans-serif;}
+.tab.active{background:var(--surface2);color:var(--text);}
+.scroll{flex:1;overflow-y:auto;padding:0 20px 100px;-webkit-overflow-scrolling:touch;}
+.scroll::-webkit-scrollbar{display:none;}
+.meal-section{margin-bottom:16px;}
+.meal-section-header{display:flex;justify-content:space-between;align-items:center;padding:10px 0 6px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.meal-section-name{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);}
+.meal-section-stats{display:flex;gap:10px;}
+.meal-p{font-size:11px;font-family:'DM Mono',monospace;color:var(--green);}
+.meal-c{font-size:11px;font-family:'DM Mono',monospace;color:var(--amber);}
+.log-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:6px;}
+.log-item-name{font-size:14px;font-weight:600;color:var(--text);}
+.log-item-time{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:2px;}
+.log-item-right{display:flex;align-items:center;gap:10px;}
+.log-p{font-size:14px;font-weight:700;color:var(--green);font-family:'DM Mono',monospace;}
+.log-c{font-size:11px;color:var(--amber);font-family:'DM Mono',monospace;}
+.del-btn{width:24px;height:24px;border-radius:50%;background:var(--surface2);border:none;color:var(--text3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.empty-meal{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;padding:8px 0;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);margin-bottom:10px;}
+.meal-picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.meal-chip{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-family:'Syne',sans-serif;}
+.meal-chip.selected{background:var(--green-dim);border-color:var(--green);color:var(--green);}
+.search-wrap{position:relative;margin-bottom:14px;}
+.search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;padding:10px 14px 10px 36px;}
+.search-input:focus{outline:none;border-color:var(--green);}
+.search-input::placeholder{color:var(--text3);}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text3);}
+.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.food-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;cursor:pointer;transition:all 0.15s;}
+.food-card:active{transform:scale(0.97);background:var(--surface2);}
+.food-card-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3;}
+.food-card-desc{font-size:10px;color:var(--text2);line-height:1.4;margin-bottom:8px;}
+.food-card-bottom{display:flex;align-items:baseline;gap:8px;}
+.food-card-p{font-size:17px;font-weight:800;color:var(--green);font-family:'DM Mono',monospace;}
+.food-card-pg{font-size:10px;color:var(--text2);}
+.food-card-c{font-size:12px;font-weight:600;color:var(--amber);font-family:'DM Mono',monospace;}
+.food-card-cg{font-size:10px;color:var(--text3);}
+.custom-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;}
+.custom-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;padding:10px 12px;margin-bottom:10px;}
+.custom-input:focus{outline:none;border-color:var(--green);}
+.custom-input::placeholder{color:var(--text3);}
+.input-row{display:flex;gap:8px;margin-bottom:10px;}
+.input-row .custom-input{margin-bottom:0;}
+.add-btn{width:100%;padding:13px;background:var(--green);color:#000;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;}
+.add-btn:active{opacity:0.8;}
+.no-results{text-align:center;padding:30px 0;color:var(--text3);font-size:13px;font-family:'DM Mono',monospace;}
+/* Popup */
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:flex-end;justify-content:center;z-index:100;backdrop-filter:blur(4px);}
+.popup-box{background:var(--surface);border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:430px;}
+.popup-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.popup-sub{font-size:12px;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:20px;}
+.popup-preview{display:flex;gap:16px;margin-bottom:20px;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);}
+.popup-preview-item{flex:1;text-align:center;}
+.popup-preview-label{font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:4px;}
+.popup-preview-val{font-size:18px;font-weight:800;}
+.qty-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.qty-label{font-size:13px;color:var(--text2);font-family:'DM Mono',monospace;flex:1;}
+.qty-controls{display:flex;align-items:center;gap:12px;}
+.qty-btn{width:36px;height:36px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;}
+.qty-btn:active{background:var(--border);}
+.qty-val{font-size:20px;font-weight:800;min-width:40px;text-align:center;font-family:'DM Mono',monospace;}
+.qty-input{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Mono',monospace;font-size:16px;padding:8px 12px;width:80px;text-align:center;}
+.qty-input:focus{outline:none;border-color:var(--green);}
+.popup-unit-toggle{display:flex;gap:8px;margin-bottom:20px;}
+.unit-chip{flex:1;padding:8px;text-align:center;border-radius:8px;font-size:12px;font-weight:700;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-family:'Syne',sans-serif;}
+.unit-chip.active{background:var(--green-dim);border-color:var(--green);color:var(--green);}
+.popup-btns{display:flex;gap:10px;}
+.popup-cancel{flex:1;padding:13px;background:var(--surface2);color:var(--text2);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;border:1px solid var(--border);border-radius:10px;cursor:pointer;}
+.popup-confirm{flex:2;padding:13px;background:var(--green);color:#000;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;border:none;border-radius:10px;cursor:pointer;text-transform:uppercase;letter-spacing:0.05em;}
+/* Charts */
+.chart-wrap{padding:12px 0;}
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:160px;margin-bottom:8px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;}
+.bar{width:100%;border-radius:4px 4px 0 0;transition:height 0.4s ease;}
+.bar-val{font-size:9px;font-family:'DM Mono',monospace;color:var(--text2);}
+.bar-day{font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);margin-top:4px;}
+.week-stat-row{display:flex;gap:10px;margin-bottom:16px;}
+.week-stat{flex:1;background:var(--surface);border-radius:var(--radius-sm);padding:10px 12px;}
+.week-stat-label{font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:4px;}
+.week-stat-val{font-size:18px;font-weight:800;}
+.no-data{text-align:center;padding:40px 0;color:var(--text3);font-size:13px;font-family:'DM Mono',monospace;}
+.hist-day{background:var(--surface);border-radius:var(--radius);padding:14px;margin-bottom:10px;}
+.hist-expanded{margin-top:12px;border-top:1px solid var(--border);padding-top:10px;}
+.hist-meal-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text2);margin-bottom:6px;}
+.hist-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div class="header-top">
+      <div class="date-label" id="date-label"></div>
+      <button class="reset-btn" onclick="resetDay()">Reset day</button>
+    </div>
+    <div class="ring-row">
+      <div class="ring-wrap">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle class="ring-bg" cx="40" cy="40" r="34"/>
+          <circle class="ring-fill" id="ring" cx="40" cy="40" r="34" stroke-dasharray="213.63" stroke-dashoffset="213.63"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-pct" id="ring-pct">0%</div>
+          <div class="ring-pct-label">protein</div>
+        </div>
+      </div>
+      <div class="stats-col">
+        <div class="stat-row"><span class="stat-label">eaten</span><span class="stat-val green" id="eaten-val">0<span>g</span></span></div>
+        <div class="stat-row"><span class="stat-label">remaining</span><span class="stat-val" id="rem-val">130<span>g</span></span></div>
+        <div class="stat-row"><span class="stat-label">target</span><input class="target-input" type="number" id="target-input" value="130" min="50" max="300"/></div>
+      </div>
+    </div>
+    <div class="cal-row">
+      <div class="cal-stat"><div class="cal-label">calories today</div><div class="cal-val" id="cal-val">0<span> kcal</span></div></div>
+      <div class="cal-stat"><div class="cal-label">cal target</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px;"><input class="target-input" type="number" id="cal-target-input" value="1500" min="500" max="5000" style="width:70px;color:var(--amber);"/><span style="font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;">kcal</span></div></div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('today')">Today</button>
+    <button class="tab" onclick="switchTab('add')">+ Add</button>
+    <button class="tab" onclick="switchTab('protein')">Protein</button>
+    <button class="tab" onclick="switchTab('calories')">Calories</button>
+    <button class="tab" onclick="switchTab('history')">History</button>
+  </div>
+  <div class="scroll" id="scroll-area">
+    <div id="tab-today"></div>
+    <div id="tab-add" style="display:none;"></div>
+    <div id="tab-protein" style="display:none;"></div>
+    <div id="tab-calories" style="display:none;"></div>
+    <div id="tab-history" style="display:none;"></div>
+  </div>
+</div>
+
+<!-- Popup -->
+<div class="popup-overlay" id="popup" style="display:none;" onclick="closePopupOutside(event)">
+  <div class="popup-box">
+    <div class="popup-title" id="popup-title"></div>
+    <div class="popup-sub" id="popup-sub"></div>
+    <div class="popup-preview">
+      <div class="popup-preview-item">
+        <div class="popup-preview-label">protein</div>
+        <div class="popup-preview-val" style="color:var(--green)" id="popup-p-preview">0g</div>
+      </div>
+      <div class="popup-preview-item">
+        <div class="popup-preview-label">calories</div>
+        <div class="popup-preview-val" style="color:var(--amber)" id="popup-c-preview">0kcal</div>
+      </div>
+    </div>
+    <div id="popup-qty-section">
+      <div class="section-label" style="margin-bottom:8px;" id="popup-qty-label">Quantity</div>
+      <div class="popup-unit-toggle" id="popup-unit-toggle"></div>
+      <div class="qty-row">
+        <span class="qty-label" id="popup-unit-hint"></span>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="changeQty(-1)">-</button>
+          <input class="qty-input" type="number" id="qty-input" value="1" min="0.5" step="0.5" oninput="updatePreview()"/>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="popup-btns">
+      <button class="popup-cancel" onclick="closePopup()">Cancel</button>
+      <button class="popup-confirm" onclick="confirmAdd()">Add to log</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var MEALS = ['Breakfast','Mid-morning','Lunch','Evening snack','Dinner'];
+var FOODS = [
+  {name:'Smoothie + Whey', desc:'Oats 40g, milk 250ml, banana, 1 scoop whey', p:39, c:510, unit:'serving'},
+  {name:'Whey scoop', desc:'Nakpro per scoop ~33g powder', p:24, c:120, unit:'scoop'},
+  {name:'Paneer', desc:'Per 100g raw', p:18, c:265, unit:'g', step:25, default:150},
+  {name:'Roti / Chapati', desc:'Per piece, medium', p:3, c:80, unit:'piece'},
+  {name:'Dal', desc:'Per bowl ~200ml cooked', p:9, c:150, unit:'bowl'},
+  {name:'Dahlia', desc:'Per 40g dry + vegetables', p:5, c:160, unit:'serving'},
+  {name:'Soya chunks', desc:'Per 50g dry weight', p:26, c:175, unit:'serving'},
+  {name:'Egg white', desc:'Per egg white', p:4, c:17, unit:'piece'},
+  {name:'Whole egg', desc:'Per egg', p:6, c:70, unit:'piece'},
+  {name:'Greek yogurt', desc:'Per 100g plain', p:10, c:60, unit:'g', step:50, default:200},
+  {name:'Milk', desc:'Per 100ml full fat', p:3.2, c:60, unit:'ml', step:50, default:250},
+  {name:'Banana', desc:'Per piece medium', p:1, c:90, unit:'piece'},
+  {name:'Oats', desc:'Per 40g dry rolled oats', p:6, c:150, unit:'serving'},
+  {name:'Rajma', desc:'Per bowl ~200ml cooked', p:13, c:180, unit:'bowl'},
+  {name:'Chole', desc:'Per bowl ~200ml cooked', p:15, c:200, unit:'bowl'},
+  {name:'Paneer gravy', desc:'Office portion per serving', p:27, c:420, unit:'serving'},
+  {name:'Chicken wings', desc:'Per piece fried', p:5, c:83, unit:'piece', default:6},
+  {name:'Tofu', desc:'Per 100g firm', p:9, c:80, unit:'g', step:50, default:100},
+  {name:'Rice', desc:'Per 100g cooked', p:2.7, c:130, unit:'g', step:50, default:150},
+  {name:'Poha', desc:'Per serving ~1 bowl', p:4, c:200, unit:'serving'},
+  {name:'Upma', desc:'Per serving ~1 bowl', p:5, c:180, unit:'serving'},
+  {name:'Idli', desc:'Per piece', p:2, c:40, unit:'piece', default:3},
+  {name:'Sambar', desc:'Per bowl ~200ml', p:4, c:90, unit:'bowl'},
+  {name:'Curd / Dahi', desc:'Per 100g plain', p:3.5, c:60, unit:'g', step:50, default:150},
+  {name:'Peanut butter', desc:'Per tablespoon ~15g', p:4, c:90, unit:'tbsp'},
+  {name:'Almonds', desc:'Per 10 pieces', p:2.6, c:70, unit:'serving'}
+];
+
+var target = parseInt(localStorage.getItem('pt_target') || '130');
+var calTarget = parseInt(localStorage.getItem('pt_cal_target') || '1500');
+if (isNaN(target) || target < 50 || target > 300) target = 130;
+if (isNaN(calTarget) || calTarget < 500 || calTarget > 5000) calTarget = 1500;
+var selectedMeal = 'Breakfast';
+var expandedDay = null;
+var searchQuery = '';
+var popupFood = null;
+
+// Storage — localStorage primary, IndexedDB as backup mirror
+var DB_NAME = 'ProteinTrackerDB';
+var DB_VERSION = 1;
+var DB_STORE = 'keyval';
+var _db = null;
+
+function openDB(cb) {
+  if (_db) { cb(_db); return; }
+  var req = indexedDB.open(DB_NAME, DB_VERSION);
+  req.onupgradeneeded = function(e) { e.target.result.createObjectStore(DB_STORE); };
+  req.onsuccess = function(e) { _db = e.target.result; cb(_db); };
+  req.onerror = function() { cb(null); };
+}
+
+function backupToIDB(key, val) {
+  openDB(function(db) {
+    if (!db) return;
+    try { db.transaction(DB_STORE,'readwrite').objectStore(DB_STORE).put(val, key); } catch(e) {}
+  });
+}
+
+function restoreFromIDB(key, cb) {
+  openDB(function(db) {
+    if (!db) { cb(null); return; }
+    var req = db.transaction(DB_STORE,'readonly').objectStore(DB_STORE).get(key);
+    req.onsuccess = function() { cb(req.result || null); };
+    req.onerror = function() { cb(null); };
+  });
+}
+
+function todayKey() { return new Date().toISOString().slice(0,10); }
+
+function getData() {
+  try { return JSON.parse(localStorage.getItem('pt_data') || '{}'); } catch(e) { return {}; }
+}
+
+function saveData(d) {
+  var str = JSON.stringify(d);
+  localStorage.setItem('pt_data', str);
+  backupToIDB('pt_data', str);
+}
+
+function todayLogs() { var d = getData(); return d[todayKey()] || []; }
+function saveTodayLogs(logs) { var d = getData(); d[todayKey()] = logs; saveData(d); }
+
+// On load — restore from IDB if localStorage is empty (e.g. after cache clear)
+function initApp() {
+  var hasLocal = localStorage.getItem('pt_data');
+  if (!hasLocal) {
+    restoreFromIDB('pt_data', function(val) {
+      if (val) { localStorage.setItem('pt_data', val); }
+      restoreFromIDB('pt_target', function(t) {
+        if (t) { localStorage.setItem('pt_target', t); target = parseInt(t) || 130; }
+        restoreFromIDB('pt_cal_target', function(c) {
+          if (c) { localStorage.setItem('pt_cal_target', c); calTarget = parseInt(c) || 1500; }
+          document.getElementById('target-input').value = target;
+          document.getElementById('cal-target-input').value = calTarget;
+          renderAll();
+        });
+      });
+    });
+  } else {
+    document.getElementById('target-input').value = target;
+    document.getElementById('cal-target-input').value = calTarget;
+    renderAll();
+  }
+}
+
+function addLog(name, protein, cal, meal) {
+  var logs = todayLogs();
+  logs.push({name:name, protein:Math.round(protein*10)/10, cal:cal?Math.round(cal):null, meal:meal, time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+  saveTodayLogs(logs);
+  renderAll();
+  switchTab('today');
+}
+
+function removeLog(i) { var logs = todayLogs(); logs.splice(i,1); saveTodayLogs(logs); renderAll(); }
+function resetDay() { if (!confirm('Reset today?')) return; var d = getData(); d[todayKey()] = []; saveData(d); renderAll(); }
+function toggleDay(key) { expandedDay = expandedDay === key ? null : key; renderHistory(); }
+function selectMeal(m) { selectedMeal = m; renderAdd(); }
+
+// POPUP
+function openPopup(idx) {
+  popupFood = FOODS[idx];
+  var f = popupFood;
+  document.getElementById('popup-title').textContent = f.name;
+  document.getElementById('popup-sub').textContent = f.desc;
+  var qtyInput = document.getElementById('qty-input');
+  qtyInput.value = f.default || 1;
+  qtyInput.step = f.step || 1;
+  qtyInput.min = f.step || 0.5;
+  var hint = '';
+  if (f.unit === 'g') hint = 'grams';
+  else if (f.unit === 'ml') hint = 'millilitres';
+  else if (f.unit === 'piece') hint = 'pieces';
+  else if (f.unit === 'scoop') hint = 'scoops';
+  else if (f.unit === 'bowl') hint = 'bowls';
+  else if (f.unit === 'tbsp') hint = 'tablespoons';
+  else hint = 'servings';
+  document.getElementById('popup-unit-hint').textContent = hint;
+  document.getElementById('popup-qty-label').textContent = 'How many ' + hint + '?';
+  document.getElementById('popup-unit-toggle').innerHTML = '';
+  updatePreview();
+  document.getElementById('popup').style.display = 'flex';
+}
+
+function closePopup() { document.getElementById('popup').style.display = 'none'; popupFood = null; }
+function closePopupOutside(e) { if (e.target === document.getElementById('popup')) closePopup(); }
+
+function changeQty(delta) {
+  var input = document.getElementById('qty-input');
+  var step = parseFloat(input.step) || 1;
+  var val = parseFloat(input.value) || 1;
+  val = Math.max(step, val + delta * step);
+  input.value = val;
+  updatePreview();
+}
+
+function updatePreview() {
+  if (!popupFood) return;
+  var f = popupFood;
+  var qty = parseFloat(document.getElementById('qty-input').value) || 1;
+  var multiplier = (f.unit === 'g' || f.unit === 'ml') ? qty / 100 : qty;
+  var p = Math.round(f.p * multiplier * 10) / 10;
+  var c = Math.round(f.c * multiplier);
+  document.getElementById('popup-p-preview').textContent = p + 'g';
+  document.getElementById('popup-c-preview').textContent = c + 'kcal';
+}
+
+function confirmAdd() {
+  if (!popupFood) return;
+  var f = popupFood;
+  var qty = parseFloat(document.getElementById('qty-input').value) || 1;
+  var multiplier = (f.unit === 'g' || f.unit === 'ml') ? qty / 100 : qty;
+  var p = f.p * multiplier;
+  var c = f.c * multiplier;
+  var label = f.name;
+  if (f.unit === 'g') label += ' (' + qty + 'g)';
+  else if (f.unit === 'ml') label += ' (' + qty + 'ml)';
+  else if (qty !== 1) label += ' x' + qty;
+  addLog(label, p, c, selectedMeal);
+  closePopup();
+}
+
+function switchTab(tab) {
+  var tabs = ['today','add','protein','calories','history'];
+  for (var i=0; i<tabs.length; i++) {
+    document.getElementById('tab-'+tabs[i]).style.display = tabs[i]===tab ? 'block' : 'none';
+  }
+  var btns = document.querySelectorAll('.tab');
+  for (var j=0; j<btns.length; j++) {
+    btns[j].classList.toggle('active', tabs[j]===tab);
+  }
+  document.getElementById('scroll-area').scrollTop = 0;
+  if (tab === 'add') { renderMealPicker(); renderFoodGrid(); }
+}
+
+function renderHeader() {
+  var logs = todayLogs();
+  var total = 0; var totalCal = 0;
+  for (var i=0; i<logs.length; i++) { total += logs[i].protein; totalCal += (logs[i].cal || 0); }
+  var rem = Math.max(0, target - total);
+  var pct = Math.min(100, Math.round(total / target * 100));
+  var circ = 213.63;
+  document.getElementById('ring-pct').textContent = pct + '%';
+  var ring = document.getElementById('ring');
+  ring.style.strokeDashoffset = circ - (circ * pct / 100);
+  ring.style.stroke = pct >= 100 ? '#00e676' : pct >= 70 ? '#ffab40' : '#448aff';
+  document.getElementById('eaten-val').innerHTML = Math.round(total*10)/10 + '<span>g</span>';
+  document.getElementById('eaten-val').className = 'stat-val ' + (pct>=100?'green':pct>=70?'amber':'');
+  document.getElementById('rem-val').innerHTML = Math.round(rem*10)/10 + '<span>g</span>';
+  document.getElementById('cal-val').innerHTML = totalCal + '<span> kcal</span>';
+  var now = new Date();
+  document.getElementById('date-label').textContent = now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
+}
+
+function renderToday() {
+  var logs = todayLogs();
+  var el = document.getElementById('tab-today');
+  if (logs.length === 0) { el.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--text3);font-family:DM Mono,monospace;font-size:13px;">No meals logged yet<br/>Tap + Add to start</div>'; return; }
+  var html = '';
+  for (var m=0; m<MEALS.length; m++) {
+    var meal = MEALS[m];
+    var items = [];
+    for (var i=0; i<logs.length; i++) { if (logs[i].meal === meal) items.push({log:logs[i],idx:i}); }
+    var mealP = 0; var mealC = 0;
+    for (var k=0; k<items.length; k++) { mealP += items[k].log.protein; mealC += (items[k].log.cal || 0); }
+    html += '<div class="meal-section"><div class="meal-section-header"><span class="meal-section-name">'+meal+'</span><div class="meal-section-stats">';
+    if (mealP > 0) html += '<span class="meal-p">'+Math.round(mealP*10)/10+'g</span>';
+    if (mealC > 0) html += '<span class="meal-c">'+Math.round(mealC)+'kcal</span>';
+    html += '</div></div>';
+    if (items.length === 0) { html += '<div class="empty-meal">— nothing logged</div>'; }
+    else {
+      for (var j=0; j<items.length; j++) {
+        var l = items[j].log; var idx = items[j].idx;
+        html += '<div class="log-item"><div><div class="log-item-name">'+l.name+'</div><div class="log-item-time">'+l.time+'</div></div>';
+        html += '<div class="log-item-right"><div style="text-align:right;"><div class="log-p">+'+l.protein+'g</div>'+(l.cal?'<div class="log-c">'+l.cal+'kcal</div>':'')+'</div>';
+        html += '<button class="del-btn" onclick="removeLog('+idx+')">x</button></div></div>';
+      }
+    }
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function renderAdd() {
+  var el = document.getElementById('tab-add');
+  if (el.dataset.built === '1') {
+    renderMealPicker();
+    renderFoodGrid();
+    return;
+  }
+  var html = '<div style="padding-top:12px;"></div>';
+  html += '<div class="section-label">Add to meal</div><div id="meal-picker-wrap" class="meal-picker"></div>';
+  html += '<div class="search-wrap"><span class="search-icon">&#128269;</span><input class="search-input" id="food-search" type="text" placeholder="Search foods..." oninput="onSearch(this.value)"/></div>';
+  html += '<div class="section-label">Your foods</div><div id="food-grid-wrap"></div>';
+  html += '<div class="section-label">Custom entry</div>';
+  html += '<div class="custom-card"><input class="custom-input" type="text" id="c-name" placeholder="Food name"/><div class="input-row"><input class="custom-input" type="number" id="c-protein" placeholder="Protein (g)" min="0"/><input class="custom-input" type="number" id="c-cal" placeholder="Calories (optional)" min="0"/></div><input class="custom-input" type="number" id="c-qty" placeholder="Quantity / servings (optional)" min="0.5" step="0.5"/><button class="add-btn" onclick="addCustom()">Add to log</button></div>';
+  el.innerHTML = html;
+  el.dataset.built = '1';
+  renderMealPicker();
+  renderFoodGrid();
+}
+
+function renderMealPicker() {
+  var el = document.getElementById('meal-picker-wrap');
+  if (!el) return;
+  var html = '';
+  for (var m=0; m<MEALS.length; m++) {
+    html += '<div class="meal-chip '+(MEALS[m]===selectedMeal?'selected':'')+'" onclick="selectMeal(\''+MEALS[m]+'\')">'+MEALS[m]+'</div>';
+  }
+  el.innerHTML = html;
+}
+
+function renderFoodGrid() {
+  var el = document.getElementById('food-grid-wrap');
+  if (!el) return;
+  var q = searchQuery.toLowerCase();
+  var filtered = [];
+  for (var i=0; i<FOODS.length; i++) {
+    if (!q || FOODS[i].name.toLowerCase().indexOf(q) !== -1 || FOODS[i].desc.toLowerCase().indexOf(q) !== -1) {
+      filtered.push({food:FOODS[i], idx:i});
+    }
+  }
+  if (filtered.length === 0) {
+    el.innerHTML = '<div class="no-results">No foods found for "'+searchQuery+'"</div>';
+    return;
+  }
+  var html = '<div class="add-grid">';
+  for (var j=0; j<filtered.length; j++) {
+    var f = filtered[j].food; var idx = filtered[j].idx;
+    html += '<div class="food-card" onclick="openPopup('+idx+')"><div class="food-card-name">'+f.name+'</div><div class="food-card-desc">'+f.desc+'</div><div class="food-card-bottom"><span class="food-card-p">'+f.p+'<span class="food-card-pg">g</span></span><span class="food-card-c">'+f.c+'<span class="food-card-cg">kcal</span></span></div></div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function onSearch(val) { searchQuery = val; renderFoodGrid(); }
+
+function selectMeal(m) { selectedMeal = m; renderMealPicker(); }
+
+function addCustom() {
+  var name = document.getElementById('c-name').value.trim();
+  var p = parseFloat(document.getElementById('c-protein').value);
+  var c = parseFloat(document.getElementById('c-cal').value);
+  var qty = parseFloat(document.getElementById('c-qty').value);
+  if (!name || isNaN(p) || p < 0) return;
+  var multiplier = (!isNaN(qty) && qty > 0) ? qty : 1;
+  var label = qty > 1 ? name + ' x' + qty : name;
+  addLog(label, p * multiplier, isNaN(c) ? null : c * multiplier, selectedMeal);
+}
+
+function renderChart(tabId, dataKey, color, unit, targetVal) {
+  var el = document.getElementById(tabId);
+  var d = getData();
+  var days = [];
+  for (var i=6; i>=0; i--) {
+    var date = new Date(); date.setDate(date.getDate()-i);
+    var key = date.toISOString().slice(0,10);
+    var logs = d[key] || [];
+    var total = 0;
+    for (var j=0; j<logs.length; j++) { total += dataKey==='protein' ? logs[j].protein : (logs[j].cal || 0); }
+    days.push({label:date.toLocaleDateString('en-IN',{weekday:'short'}).slice(0,2), val:total, key:key});
+  }
+  var sum = 0; var count = 0;
+  for (var k=0; k<days.length; k++) { if (days[k].val > 0) { sum += days[k].val; count++; } }
+  var avg = count ? Math.round(sum/count) : 0;
+  var max = targetVal;
+  for (var n=0; n<days.length; n++) { if (days[n].val > max) max = days[n].val; }
+  var html = '<div class="chart-wrap"><div class="week-stat-row"><div class="week-stat"><div class="week-stat-label">7-day avg</div><div class="week-stat-val" style="color:'+color+'">'+avg+'<span style="font-size:12px;color:var(--text2);font-weight:400;">'+unit+'</span></div></div><div class="week-stat"><div class="week-stat-label">today</div><div class="week-stat-val" style="color:'+color+'">'+Math.round(days[6].val)+'<span style="font-size:12px;color:var(--text2);font-weight:400;">'+unit+'</span></div></div></div>';
+  html += '<div class="bar-chart">';
+  for (var b=0; b<days.length; b++) {
+    var pct = max > 0 ? (days[b].val / max * 100) : 0;
+    var bc = days[b].key === todayKey() ? color : color+'88';
+    html += '<div class="bar-col"><div class="bar-val">'+(days[b].val>0?Math.round(days[b].val):'')+'</div><div class="bar" style="height:'+Math.max(pct,days[b].val>0?4:0)+'%;background:'+bc+';"></div><div class="bar-day">'+days[b].label+'</div></div>';
+  }
+  html += '</div><div style="height:1px;background:var(--border);margin:8px 0;"></div><div style="font-size:11px;color:var(--text3);font-family:DM Mono,monospace;">Target: '+targetVal+unit+' daily</div></div>';
+  el.innerHTML = html;
+}
+
+function clearAllHistory() {
+  if (!confirm('Clear all history? This cannot be undone.')) return;
+  localStorage.removeItem('pt_data');
+  renderAll();
+}
+
+function renderHistory() {
+  var el = document.getElementById('tab-history');
+  var d = getData();
+  var keys = [];
+  for (var k in d) { if (d[k] && d[k].length > 0) keys.push(k); }
+  keys.sort().reverse();
+  var html = '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 8px;">';
+  html += '<span class="section-label" style="margin-bottom:0;">Past days</span>';
+  if (keys.length > 0) html += '<button onclick="clearAllHistory()" style="font-size:11px;color:var(--red);font-family:DM Mono,monospace;background:none;border:1px solid var(--red);border-radius:20px;padding:4px 12px;cursor:pointer;">Clear all</button>';
+  html += '</div>';
+  if (keys.length === 0) { el.innerHTML = html + '<div class="no-data">No past history yet.</div>'; return; }
+  var limit = Math.min(keys.length, 30);
+  for (var i=0; i<limit; i++) {
+    var key = keys[i];
+    var logs = d[key] || [];
+    var totalP = 0; var totalC = 0;
+    for (var j=0; j<logs.length; j++) { totalP += logs[j].protein; totalC += (logs[j].cal || 0); }
+    var pct = Math.min(100, Math.round(totalP / target * 100));
+    var date = new Date(key + 'T00:00:00');
+    var label = date.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'short'});
+    var isExp = expandedDay === key;
+    var barColor = pct>=100?'#00e676':pct>=70?'#ffab40':'#448aff';
+    html += '<div class="hist-day"><div onclick="toggleDay(\''+key+'\')" style="cursor:pointer;">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
+    html += '<span style="font-size:13px;font-weight:700;">'+label+'</span>';
+    html += '<div style="display:flex;gap:10px;align-items:center;">';
+    html += '<span style="font-size:12px;font-family:DM Mono,monospace;color:var(--green);">'+Math.round(totalP*10)/10+'g</span>';
+    if (totalC > 0) html += '<span style="font-size:12px;font-family:DM Mono,monospace;color:var(--amber);">'+totalC+'kcal</span>';
+    html += '<span style="font-size:11px;color:var(--text3);">'+(isExp?'▲':'▼')+'</span>';
+    html += '</div></div>';
+    html += '<div style="height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;"><div style="height:100%;border-radius:2px;background:'+barColor+';width:'+pct+'%;"></div></div>';
+    html += '</div>';
+    if (isExp) {
+      html += '<div class="hist-expanded">';
+      for (var m=0; m<MEALS.length; m++) {
+        var mItems = [];
+        for (var li=0; li<logs.length; li++) { if (logs[li].meal === MEALS[m]) mItems.push(logs[li]); }
+        if (mItems.length === 0) continue;
+        html += '<div style="margin-bottom:10px;"><div class="hist-meal-label">'+MEALS[m]+'</div>';
+        for (var mi=0; mi<mItems.length; mi++) {
+          var l = mItems[mi];
+          html += '<div class="hist-item"><span style="font-size:13px;color:var(--text);">'+l.name+'</span><div><span style="font-size:13px;font-family:DM Mono,monospace;color:var(--green);">'+l.protein+'g</span>'+(l.cal?'<span style="font-size:11px;font-family:DM Mono,monospace;color:var(--amber);margin-left:8px;">'+l.cal+'kcal</span>':'')+'</div></div>';
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function renderAll() {
+  renderHeader();
+  renderToday();
+  renderAdd();
+  renderChart('tab-protein','protein','#00e676','g',target);
+  renderChart('tab-calories','cal','#ffab40','kcal',calTarget);
+  renderHistory();
+}
+
+document.getElementById('target-input').addEventListener('change', function() {
+  target = Math.max(50, Math.min(300, parseInt(this.value) || 130));
+  localStorage.setItem('pt_target', target);
+  backupToIDB('pt_target', String(target));
+  renderAll();
+});
+document.getElementById('cal-target-input').addEventListener('change', function() {
+  calTarget = Math.max(500, Math.min(5000, parseInt(this.value) || 1500));
+  localStorage.setItem('pt_cal_target', calTarget);
+  backupToIDB('pt_cal_target', String(calTarget));
+  renderAll();
+});
+
+initApp();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function(e) { console.log('SW error', e); });
+}
+
+(function migrate() {
+  var old = localStorage.getItem('pt_data');
+  if (old) { backupToIDB('pt_data', old); }
+  var oldT = localStorage.getItem('pt_target');
+  if (oldT) { backupToIDB('pt_target', oldT); }
+  var oldC = localStorage.getItem('pt_cal_target');
+  if (oldC) { backupToIDB('pt_cal_target', oldC); }
+})();
+</script>
+</body>
+</html>
